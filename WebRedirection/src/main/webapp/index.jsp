@@ -248,7 +248,7 @@ form button:hover {
 </head>
 <body class="wrapper">
 <!-- 	<div align="center">
-		<h2>Test Center</h2>
+		
 		<a href="hello?name=Eric">Click Here</a>
 	</div>
 	<form action="evaluate">
