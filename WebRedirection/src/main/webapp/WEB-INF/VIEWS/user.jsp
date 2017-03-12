@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -270,7 +272,7 @@ opacity: 1;
 .col_md_3_list > .cont_btns_options{
   position: absolute;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
@@ -350,13 +352,19 @@ opacity: 1;
 var contador = 0
 ,   select_opt = 0;
 
+
+	
 function add_to_list(){
 var action = document.querySelector('#action_select').value,
 description = document.querySelector('.input_description').value, 
 title = document.querySelector('.input_title_desc').value,
 date = document.getElementById('date_select').value;
- 
 
+add_element(action,description,title,date);
+
+}
+
+function add_element(action,description,title,date){
 switch (action) {
   case "SHOPPING":
  select_opt  = 0;
@@ -370,29 +378,44 @@ case "SPORT":
 case "MUSIC":
 select_opt = 3; 
     break;
+default:
+	select_opt = 1; 
+	    break;
+    
 }  
   
 var class_li  =['list_shopping list_dsp_none','list_work list_dsp_none','list_sport list_dsp_none','list_music list_dsp_none'];  
 
-var cont = '<div class="col_md_1_list">    <p>'+action+'</p>    </div> <div class="col_md_2_list"> <h4>'+title+'</h4> <p>'+description+'</p> </div>    <div class="col_md_3_list"> <div class="cont_text_date"> <p>'+date+'</p>  </div>  <div class="cont_btns_options">    <ul>  <li><a href="#finish" onclick="finish_action('+select_opt+','+contador+');" ><i class="material-icons">&#xE5CA;</i></a></li>   </ul>  </div>    </div>';  
+var cont = '<div class="col_md_1_list">    <p>'+action+'</p>    </div> <div class="col_md_2_list"> <h4>'+title+'</h4> <p>'+description+'</p> </div>    <div class="col_md_3_list"> <div class="cont_text_date"> <p>'+date+'</p>  </div>  <div class="cont_btns_options">    <ul>  <li><a href="/WebRedirection/test?test='+title+'"  ><i class="material-icons">&#xE5CA;</i></a></li>   </ul>  </div>    </div>';  
  
 var li = document.createElement('li')  
-li.className = class_li[select_opt]+" li_num_"+contador;
+//li.className = class_li[select_opt]+" li_num_"+contador;
+li.className = "list_dsp_true "+class_li[select_opt]+" li_num_"+contador
 
 li.innerHTML = cont;
+li.style.display = "block"
+	li.style.margin= "0 0 3px 0"
+var l=document.querySelectorAll('.cont_princ_lists > ul');
 document.querySelectorAll('.cont_princ_lists > ul')[0].appendChild(li);
-
-setTimeout(function(){  document.querySelector('.li_num_'+contador).style.display = "block";
-},100);
+contador++;
+/* setTimeout(function(){  
+	var m = document.querySelector('.li_num_'+contador);
+	var t=9;
+	t--;
+	document.querySelector('.li_num_'+contador).style.display = "block";
+},100); */
   
-setTimeout(function(){
+/* setTimeout(function(){
+	var o=document.querySelector('.li_num_'+contador).className;
   document.querySelector('.li_num_'+contador).className = "list_dsp_true "+class_li[select_opt]+" li_num_"+contador;
+  var t=9;
+	t--;
 contador++;
 },200);
-
+ */
 }
 
-function finish_action(num,num2) {
+function finish_action(num,num2,num3) {
  
 var class_li  =['list_shopping list_dsp_true','list_work  list_dsp_true','list_sport list_dsp_true','list_music list_dsp_true'];   
 console.log('.li_num_'+num2);
@@ -400,6 +423,7 @@ console.log('.li_num_'+num2);
 setTimeout(function(){
            del_finish();
            },500);
+//window.location.href='/test?test='+num3;
 }
 
 function del_finish(){
@@ -434,7 +458,10 @@ document.querySelector('.cont_add_titulo_cont').className = "cont_add_titulo_con
 }</script>
 </head>
 <body>
-<div class="cont_principal">
+${prop.proposals}
+${message}
+
+<div class="cont_principal" >
 <div class="cont_centrar">
 
   <div class="cont_todo_list_top">
@@ -492,7 +519,8 @@ document.querySelector('.cont_add_titulo_cont').className = "cont_add_titulo_con
   
   
 <div class="cont_princ_lists">
-<ul>qw
+
+<ul><!-- qw
   <li class="list_shopping li_num_0_1" onclick="finish_action('0','0_1');">
   x<div class="col_md_1_list">
    1 <p>TEST</p>
@@ -512,7 +540,7 @@ document.querySelector('.cont_add_titulo_cont').className = "cont_add_titulo_con
   </ul>    
       </div>
     </div>
-  </li>
+  </li> -->
 <!-- <li class="list_work"></li>
   <li class="list_sport"></li>
   <li class="list_music"></li>
@@ -522,6 +550,19 @@ document.querySelector('.cont_add_titulo_cont').className = "cont_add_titulo_con
   
   <!--   End cont_central  -->
   </div>
+</div>
+<div>
+<c:forEach var="proposal" items="${prop.proposals}">
+  <br/>
+   ${proposal.name}<script type="text/javascript">
+  add_element( '${proposal.name}','${proposal.testDesc}','${proposal.testId}','${proposal.testDesc}');
+  </script>
+</c:forEach>
+<%-- <c:forEach var="proposal" items="${proposals.proposals}">
+   <script type="text/javascript">
+   add_element(proposal.name,proposal.testDesc,proposal.testId,proposal.testDesc,'today');
+    </script>
+</c:forEach> --%>
 </div>
 </body>
 </html>
