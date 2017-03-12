@@ -396,7 +396,7 @@ li.innerHTML = cont;
 li.style.display = "block"
 	li.style.margin= "0 0 3px 0"
 var l=document.querySelectorAll('.cont_princ_lists > ul');
-document.querySelectorAll('.cont_princ_lists > ul')[0].appendChild(li);
+document.querySelectorAll('.cont_princ_lists > ul')[0].appendChild(li); 
 contador++;
 /* setTimeout(function(){  
 	var m = document.querySelector('.li_num_'+contador);

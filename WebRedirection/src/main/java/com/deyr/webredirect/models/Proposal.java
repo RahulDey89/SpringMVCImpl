@@ -6,7 +6,7 @@ private User user;
 private int proposalId;
 private int testId;
 private int ansId;
-private String testDesc;
+private String testDesc; 
 private String title;
 public String getName() {
 	return name;

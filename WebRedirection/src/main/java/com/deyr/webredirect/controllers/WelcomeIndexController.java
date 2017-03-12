@@ -44,7 +44,7 @@ public class WelcomeIndexController {
 		List<Proposal> proplist=new ArrayList<Proposal>();
 		Proposal prop1 = new Proposal();
 		prop1.setName("Java Test");
-		prop1.setTestDesc("java test exp 2-3");
+		prop1.setTestDesc("java test exp 2-3"); 
 		prop1.setTestId(1);
 		prop1.setProposalId(123);
 		proplist.add(prop1);

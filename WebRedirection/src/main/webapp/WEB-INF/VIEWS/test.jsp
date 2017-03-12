@@ -289,7 +289,7 @@ body {
 						<div class="comment-head">
 							<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
 							<span>hace 20 minutos</span>
-							<i class="fa fa-reply"></i>
+							<i class="fa fa-reply"></i> 
 							<i class="fa fa-heart"></i>
 						</div>
 						<div class="comment-content">
