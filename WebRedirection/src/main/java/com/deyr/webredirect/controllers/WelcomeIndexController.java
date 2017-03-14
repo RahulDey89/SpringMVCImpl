@@ -15,8 +15,12 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.deyr.webredirect.models.Answer;
 import com.deyr.webredirect.models.Proposal;
 import com.deyr.webredirect.models.ProposalBean;
+import com.deyr.webredirect.models.Question;
+import com.deyr.webredirect.models.QuestionBean;
+import com.deyr.webredirect.models.QuestionObj;
 import com.deyr.webredirect.models.User;
 
 @Controller
@@ -67,11 +71,65 @@ public class WelcomeIndexController {
 	}
 	@RequestMapping("/test")
 	public ModelAndView testCtrl(@RequestParam(value="test" ,required=false,defaultValue="World") String name,HttpServletRequest httpServletRequest){
-		ModelAndView view = new ModelAndView("test");
+		ModelAndView view = new ModelAndView("formSubmit");
+		List<QuestionObj> questionObjs = new ArrayList<QuestionObj>();
+		QuestionObj obj1= new QuestionObj();
+		Question question1= new Question();
+		question1.setQid(1);
+		question1.setQuestionDesc("how do you do");
+		question1.setOption_1("fine");
+		question1.setOption_2("ok");
+		question1.setQuestionType("MCQ");
+		Answer answer1 = new Answer();
+		answer1.setQid(1);
+		answer1.setAnsDesc("");
+		obj1.setAnswer(answer1);
+		obj1.setQuestion(question1);
+		questionObjs.add(obj1);
 		
+		QuestionObj obj2= new QuestionObj();
+		Question question2= new Question();
+		question2.setQid(2);
+		question2.setQuestionDesc("how are stuff");
+		question2.setOption_1("good");
+		question2.setOption_2("fantastic");
+		question2.setQuestionType("MCQ");
+		Answer answer2 = new Answer();
+		answer2.setQid(2);
+		answer2.setAnsDesc("");
+		obj2.setAnswer(answer2);
+		obj2.setQuestion(question1);
+		questionObjs.add(obj2);
+		
+		QuestionObj obj3= new QuestionObj();
+		Question question3= new Question();
+		question3.setQid(1);
+		question3.setQuestionDesc("what is life");
+		question3.setQuestionType("TXT");
+		Answer answer3 = new Answer();
+		answer3.setQid(3);
+		answer3.setAnsDesc("");
+		obj3.setAnswer(answer3);
+		obj3.setQuestion(question3);
+		questionObjs.add(obj3);
+		
+		QuestionBean questionBean = new QuestionBean();
+		questionBean.setQuestions(questionObjs);
+		
+		view.addObject("questionBean",questionBean);
 		int t=0;
 		t++;
 		return view;
 	}
+	
+	@RequestMapping("/frmsubmit")
+	public ModelAndView frmSubmit(@ModelAttribute QuestionBean bean,HttpServletRequest httpServletRequest){
+		bean.getQuestions();
+		int t=9;
+		t++;
+		t--;
+		return null;
+	}
+	
 	
 }
