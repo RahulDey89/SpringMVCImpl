@@ -24,12 +24,12 @@
 <c:if test="${q.question.questionType == 'TXT'}">
 <br/>
 <div>${q.question.questionDesc}</div>
-<br/>
+<br/> 
 <form:textarea path="questions[${it.index}].answer.ansDesc" row="22" col="50"/>
 </c:if>
 
 </c:forEach>
-<input type="submit">click</input>
+<input type="submit">click it</input>
 </form:form>
 </div>
 </body>
