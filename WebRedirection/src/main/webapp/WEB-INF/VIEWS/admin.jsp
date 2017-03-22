@@ -75,7 +75,7 @@ h1 {
 
 html{
   background-color: #ffffff;
-}
+} 
 
 .testbox {
   
@@ -258,7 +258,7 @@ a.button:hover {
 </head>
 <body>
 
-<h2>Modal Example</h2>
+<h2>Modal Example 2 </h2>
 
 <!-- Trigger/Open The Modal -->
 <button id="btn" onclick="btnclick()">Open Modal</button>
